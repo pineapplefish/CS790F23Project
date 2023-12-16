@@ -1,0 +1,121 @@
+{
+    "m_SelectedDeviceId": "1WMHHA42WH2165",
+    "m_SelectedPackage": {
+        "deviceId": "1WMHHA42WH2165",
+        "name": "com.DefaultCompany.Assignment5",
+        "processId": 7869,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 6395,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 5052,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.oculus.shellenv",
+            "processId": 2257,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 6503,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 7143,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 7251,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 7869,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_FilterOptions": {
+        "m_Filter": "",
+        "m_UseRegularExpressions": false,
+        "m_MatchCase": false
+    },
+    "m_SymbolPaths": [],
+    "m_CaptureVideoSettings": {
+        "TimeLimitEnabled": false,
+        "TimeLimit": 180,
+        "VideoSizeEnabled": false,
+        "VideoSizeX": 1280,
+        "VideoSizeY": 720,
+        "BitRateEnabled": false,
+        "BitRateK": 20000,
+        "DisplayIdEnabled": false,
+        "DisplayId": ""
+    }
+}
