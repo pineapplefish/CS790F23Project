@@ -62,16 +62,21 @@ public class OrbController : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;    //TODO: Enable moving of this
-            this.transform.up = head.position - this.transform.position;
+            //this.transform.up = head.position - this.transform.position;
+            this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
+            this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
         }
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, inactiveAnchor.position,
                 Time.deltaTime * Vector3.Distance(this.transform.position, inactiveAnchor.position) * moveSpeed);
-            this.transform.up = head.position - this.transform.position;
+            //this.transform.up = head.position - this.transform.position;
+            this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
+            this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
         }
+        print(this.transform.rotation.eulerAngles);
 
         //Update world representation
         foreach (GameObject obj in miniObjects)
