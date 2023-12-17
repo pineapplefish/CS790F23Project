@@ -7522,7 +7522,7 @@ GameObject:
   - component: {fileID: 1535558234}
   - component: {fileID: 1535558233}
   - component: {fileID: 1535558232}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -8450,6 +8450,11 @@ MonoBehaviour:
   activeScale: 0.5
   inactiveScale: 0.2
   orbActivationButton: 1
+  mapRadius: 15
+  miniScale: 1
+  worldLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1001 &1762788182
 PrefabInstance:
   m_ObjectHideFlags: 0

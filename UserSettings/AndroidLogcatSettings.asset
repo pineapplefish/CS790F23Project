@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
         "name": "com.DefaultCompany.Assignment5",
-        "processId": 7869,
+        "processId": 9228,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,43 +11,43 @@
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 6395,
+            "processId": 12255,
             "exited": true
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 5052,
+            "processId": 5824,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 6698,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 7556,
             "exited": true
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.oculus.shellenv",
-            "processId": 2257,
+            "processId": 1985,
             "exited": false
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 6503,
+            "processId": 8424,
             "exited": false
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 7143,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 7251,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 7869,
+            "processId": 9228,
             "exited": false
         }
     ],
