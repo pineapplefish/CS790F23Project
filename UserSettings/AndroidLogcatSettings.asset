@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "1WMHHA42WH2165",
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
-        "name": "com.DefaultCompany.Assignment5",
-        "processId": 21322,
+        "name": "com.DefaultCompany.FinalProject",
+        "processId": 24288,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -13,12 +13,6 @@
             "name": "com.oculus.shellenv",
             "processId": 1985,
             "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 17621,
-            "exited": true
         },
         {
             "deviceId": "1WMHHA42WH2165",
@@ -42,6 +36,18 @@
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
             "processId": 21322,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 22404,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 24288,
             "exited": false
         }
     ],

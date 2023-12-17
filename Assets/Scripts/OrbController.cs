@@ -76,7 +76,6 @@ public class OrbController : MonoBehaviour
             this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
         }
-        print(this.transform.rotation.eulerAngles);
 
         //Update world representation
         foreach (GameObject obj in miniObjects)

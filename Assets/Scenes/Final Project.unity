@@ -2554,6 +2554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178f94b340cd0564ba3d6289f6e82d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportLayer:
+    serializedVersion: 2
+    m_Bits: 129
 --- !u!114 &456697694
 MonoBehaviour:
   m_ObjectHideFlags: 0
