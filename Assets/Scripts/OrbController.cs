@@ -62,12 +62,15 @@ public class OrbController : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;    //TODO: Enable moving of this
+            this.transform.up = head.position - this.transform.position;
+            //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
         }
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, inactiveAnchor.position,
                 Time.deltaTime * Vector3.Distance(this.transform.position, inactiveAnchor.position) * moveSpeed);
             this.transform.up = head.position - this.transform.position;
+            //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
         }
 
         //Update world representation
@@ -96,7 +99,9 @@ public class OrbController : MonoBehaviour
 
     Vector3 getPositionOnSphere(Vector3 relativePosition)
     {
-        //TODO: Return localPosition relative to orb
-        return Vector3.up/2;
+        float angle1 = 90 * (relativePosition.magnitude / mapRadius) * Mathf.Deg2Rad;
+        float angle2 = Vector3.SignedAngle(Vector3.forward, Vector3.Scale(relativePosition, new Vector3(1, 0, 1)), Vector3.up) * Mathf.Deg2Rad;
+        //TODO: Account for vertical position
+        return new Vector3(Mathf.Sin(angle1) * Mathf.Sin(angle2), Mathf.Cos(angle1), Mathf.Sin(angle1) * Mathf.Cos(angle2)) * 0.5f;
     }
 }

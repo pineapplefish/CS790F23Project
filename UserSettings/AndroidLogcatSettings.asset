@@ -1,37 +1,13 @@
 {
     "m_SelectedDeviceId": "1WMHHA42WH2165",
     "m_SelectedPackage": {
-        "deviceId": "1WMHHA42WH2165",
-        "name": "com.DefaultCompany.Assignment5",
-        "processId": 9228,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 12255,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 5824,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 6698,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 7556,
-            "exited": true
-        },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.oculus.shellenv",
@@ -41,14 +17,26 @@
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 8424,
-            "exited": false
+            "processId": 16067,
+            "exited": true
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.Assignment5",
-            "processId": 9228,
-            "exited": false
+            "processId": 16833,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 17621,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 18263,
+            "exited": true
         }
     ],
     "m_Tags": {
