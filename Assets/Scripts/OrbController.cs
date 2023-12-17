@@ -96,6 +96,7 @@ public class OrbController : MonoBehaviour
             newMini.transform.localScale = Vector3.one * miniScale / mapRadius;
             newMini.transform.localPosition = getPositionOnSphere(col.transform.position - groundCoordinates);
             newMini.transform.up = newMini.transform.position - this.transform.position;
+            //TODO: Account for original objects rotation
 
             miniObjects.Add(newMini);
         }

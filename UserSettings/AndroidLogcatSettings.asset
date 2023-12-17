@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "1WMHHA42WH2165",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "1WMHHA42WH2165",
+        "name": "com.DefaultCompany.Assignment5",
+        "processId": 21322,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -37,6 +37,12 @@
             "name": "com.DefaultCompany.Assignment5",
             "processId": 19975,
             "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.Assignment5",
+            "processId": 21322,
+            "exited": false
         }
     ],
     "m_Tags": {
