@@ -1,6 +1,6 @@
 # CS 790 Final Project
 
-This project will focus on implementing a variant of the World-In-Miniature technique for locomotion, as described in 10.1109/VR50410.2021.00057. In this variant, the miniature world used to select teleportation targets is projected onto a sphere.
+This project will focus on implementing a variant of the World-In-Miniature technique for locomotion, as described in https://doi.org/10.1109/VR50410.2021.00057. In this variant, the miniature world used to select teleportation targets is projected onto a sphere.
 
 ## Submission Information
 
