@@ -76,7 +76,8 @@ public class WIMSelectionController : MonoBehaviour
                         float dist = orbController.mapRadius * (Vector3.Angle(theOrb.up, spherePoint - theOrb.position) / 90);
                         float angle = Vector3.SignedAngle(theOrb.forward, Vector3.ProjectOnPlane(spherePoint - theOrb.position, theOrb.up), theOrb.up) * Mathf.Deg2Rad;
                         //print(dist + " " + angle);
-                        teleportationController.Teleport(dist * Mathf.Sin(angle), dist * Mathf.Cos(angle));
+                        teleportationController.Teleport(this.transform.position.x + (dist * Mathf.Sin(angle)),
+                            this.transform.position.z + (dist * Mathf.Cos(angle)));
                         orbController.toggleActive();
                     }
                 }
