@@ -9,6 +9,7 @@ public class WIMSelectionController : MonoBehaviour
     private Transform theOrb;
     private LayerMask orbLayer = 1 << 6;
     private TeleportationController teleportationController;
+    private OrbController orbController;
 
     private GameObject rightControllerAnchor;
     private GameObject leftControllerAnchor;
@@ -23,6 +24,7 @@ public class WIMSelectionController : MonoBehaviour
         theOrb = GameObject.Find("The Orb(tm)").transform;
         orbLayer = LayerMask.GetMask("The Orb(tm)");
         teleportationController = GetComponent<TeleportationController>();
+        orbController = theOrb.GetComponent<OrbController>();
 
         rightControllerAnchor = this.transform.Find("TrackingSpace/RightHandAnchor/RightControllerAnchor").gameObject;
         leftControllerAnchor = this.transform.Find("TrackingSpace/LeftHandAnchor/LeftControllerAnchor").gameObject;
@@ -31,52 +33,57 @@ public class WIMSelectionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Check for activation
-        if (!indicating)
+        //Only active when orb is in active view mode
+        if (orbController.isActive())
         {
-            if (OVRInput.Get(teleportBind) > 0.8f)
+            //Check for activation
+            if (!indicating)
             {
-                indicating = true;
-                rightControllerAnchor.GetComponent<LineRenderer>().enabled = true;
-            }
-        }
-
-        //Indication active
-        if (indicating)
-        {
-            rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(0, rightControllerAnchor.transform.position);
-            RaycastHit hit;
-            if (Physics.Raycast(rightControllerAnchor.transform.position, rightControllerAnchor.transform.forward, out hit, 5, orbLayer))
-            {
-                rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, hit.point);
-                spherePoint = hit.point;
-                validPoint = true;
-            }
-            else
-            {
-                rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, rightControllerAnchor.transform.position + rightControllerAnchor.transform.forward * 5);
-                validPoint = false;
-            }
-
-            //Trigger released
-            if (OVRInput.Get(teleportBind) < 0.2f)
-            {
-                //Disable indication
-                indicating = false;
-                rightControllerAnchor.GetComponent<LineRenderer>().enabled = false;
-
-                if (validPoint)
+                if (OVRInput.Get(teleportBind) > 0.8f)
                 {
-                    //Convert sphere point to teleport coordinates and teleport
-                    float dist = theOrb.GetComponent<OrbController>().mapRadius * (Vector3.Angle(theOrb.up, spherePoint - theOrb.position) / 90);
-                    float angle = Vector3.SignedAngle(theOrb.forward, Vector3.ProjectOnPlane(spherePoint - theOrb.position, theOrb.up), theOrb.up) * Mathf.Deg2Rad;
-                    //print(dist + " " + angle);
-                    teleportationController.Teleport(dist * Mathf.Sin(angle), dist * Mathf.Cos(angle));
+                    indicating = true;
+                    rightControllerAnchor.GetComponent<LineRenderer>().enabled = true;
                 }
             }
+
+            //Indication active
+            if (indicating)
+            {
+                rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(0, rightControllerAnchor.transform.position);
+                RaycastHit hit;
+                if (Physics.Raycast(rightControllerAnchor.transform.position, rightControllerAnchor.transform.forward, out hit, 5, orbLayer))
+                {
+                    rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, hit.point);
+                    spherePoint = hit.point;
+                    validPoint = true;
+                }
+                else
+                {
+                    rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, rightControllerAnchor.transform.position + rightControllerAnchor.transform.forward * 5);
+                    validPoint = false;
+                }
+
+                //Trigger released
+                if (OVRInput.Get(teleportBind) < 0.2f)
+                {
+                    //Disable indication
+                    indicating = false;
+                    rightControllerAnchor.GetComponent<LineRenderer>().enabled = false;
+
+                    if (validPoint)
+                    {
+                        //Convert sphere point to teleport coordinates and teleport
+                        float dist = orbController.mapRadius * (Vector3.Angle(theOrb.up, spherePoint - theOrb.position) / 90);
+                        float angle = Vector3.SignedAngle(theOrb.forward, Vector3.ProjectOnPlane(spherePoint - theOrb.position, theOrb.up), theOrb.up) * Mathf.Deg2Rad;
+                        //print(dist + " " + angle);
+                        teleportationController.Teleport(dist * Mathf.Sin(angle), dist * Mathf.Cos(angle));
+                        orbController.toggleActive();
+                    }
+                }
+            }
+            //TODO: Rotate sphere with left controller
         }
 
-        //TODO: Rotate sphere with left controller
 
         //Activate linerenderer when pointing at sphere
         /*RaycastHit hit;

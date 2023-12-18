@@ -43,16 +43,7 @@ public class OrbController : MonoBehaviour
         //Check for mode switch
         if (OVRInput.GetDown(orbActivationButton))
         {
-            if (active)
-            {
-                active = false;
-                this.transform.localScale = Vector3.one * inactiveScale;
-            } 
-            else
-            {
-                active = true;
-                this.transform.localScale = Vector3.one * activeScale;
-            }
+            toggleActive();
         }
 
         //Update orb location
@@ -99,14 +90,29 @@ public class OrbController : MonoBehaviour
 
             miniObjects.Add(newMini);
         }
-        //TODO: Add player representation
     }
 
-    Vector3 getPositionOnSphere(Vector3 relativePosition)
+    private Vector3 getPositionOnSphere(Vector3 relativePosition)
     {
         float angle1 = 90 * (relativePosition.magnitude / mapRadius) * Mathf.Deg2Rad;
         float angle2 = Vector3.SignedAngle(Vector3.forward, Vector3.Scale(relativePosition, new Vector3(1, 0, 1)), Vector3.up) * Mathf.Deg2Rad;
         //TODO: Account for vertical position
         return new Vector3(Mathf.Sin(angle1) * Mathf.Sin(angle2), Mathf.Cos(angle1), Mathf.Sin(angle1) * Mathf.Cos(angle2)) * 0.5f;
+    }
+
+    public bool isActive() { return active; }
+
+    public void toggleActive()
+    {
+        if (active)
+        {
+            active = false;
+            this.transform.localScale = Vector3.one * inactiveScale;
+        }
+        else
+        {
+            active = true;
+            this.transform.localScale = Vector3.one * activeScale;
+        }
     }
 }
