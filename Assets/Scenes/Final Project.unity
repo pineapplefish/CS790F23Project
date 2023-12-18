@@ -9203,6 +9203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  rotateSpeed: 5
   activeScale: 0.5
   inactiveScale: 0.2
   orbActivationButton: 1

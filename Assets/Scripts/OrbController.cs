@@ -6,6 +6,7 @@ using UnityEngine;
 public class OrbController : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
+    public float rotateSpeed = 5.0f;
     public float activeScale = 0.5f;
     public float inactiveScale = 0.2f;
 
@@ -19,6 +20,9 @@ public class OrbController : MonoBehaviour
     private Transform activeAnchor;
     private Transform inactiveAnchor;
     private Transform head;
+
+    private Quaternion activeNorthRotation;
+    private Quaternion inactiveNorthRotation;
 
     private int uiLayer;
     private List<GameObject> displayedObjects = new List<GameObject>();
@@ -35,6 +39,13 @@ public class OrbController : MonoBehaviour
 
         uiLayer = LayerMask.NameToLayer("UI");
 
+        activeAnchor.rotation = Quaternion.LookRotation(head.position - activeAnchor.position, Vector3.down);
+        activeAnchor.Rotate(Vector3.right, 90, Space.Self);
+        activeNorthRotation = activeAnchor.localRotation;
+        inactiveAnchor.rotation = Quaternion.LookRotation(head.position - inactiveAnchor.position, Vector3.down);
+        inactiveAnchor.Rotate(Vector3.right, 90, Space.Self);
+        inactiveNorthRotation = inactiveAnchor.localRotation;
+
         this.transform.localScale = Vector3.one * inactiveScale;
     }
 
@@ -50,23 +61,30 @@ public class OrbController : MonoBehaviour
         //Update orb location
         if (active)
         {
+            activeAnchor.localRotation = activeNorthRotation;
+            activeAnchor.Rotate(Vector3.up, Mathf.Atan2(-head.forward.x, head.forward.z) * Mathf.Rad2Deg, Space.Self);
+
             //TODO: Change to Vector3.SmoothDamp?
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;    //TODO: Enable moving of this
             //this.transform.up = head.position - this.transform.position;
-            this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
-            this.transform.Rotate(Vector3.right, 90, Space.Self);
+            //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
+            //this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, activeAnchor.rotation, 
+                Time.deltaTime * Quaternion.Angle(this.transform.rotation, activeAnchor.rotation) * rotateSpeed);
         }
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, inactiveAnchor.position,
                 Time.deltaTime * Vector3.Distance(this.transform.position, inactiveAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;
-            this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
-            this.transform.Rotate(Vector3.right, 90, Space.Self);
+            //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
+            //this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, inactiveAnchor.rotation,
+                Time.deltaTime * Quaternion.Angle(this.transform.rotation, inactiveAnchor.rotation) * rotateSpeed);
         }
 
         //Update world representation
