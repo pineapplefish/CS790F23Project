@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
         "name": "com.DefaultCompany.FinalProject",
-        "processId": 24288,
+        "processId": 7863,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -16,38 +16,44 @@
         },
         {
             "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 18263,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 19089,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 19975,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.Assignment5",
-            "processId": 21322,
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 3343,
             "exited": true
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.FinalProject",
-            "processId": 22404,
+            "processId": 4353,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 5293,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 6106,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 5879,
             "exited": false
         },
         {
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.FinalProject",
-            "processId": 24288,
+            "processId": 7092,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 7863,
             "exited": false
         }
     ],
