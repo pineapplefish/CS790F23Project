@@ -14,6 +14,7 @@ public class OrbController : MonoBehaviour
     public float mapRadius = 15.0f;
     public float miniScale = 1.0f;
     public LayerMask worldLayer = 0;
+    public string rootTag = "ObjectRoot";
 
     private Transform activeAnchor;
     private Transform inactiveAnchor;
@@ -78,13 +79,32 @@ public class OrbController : MonoBehaviour
         Vector3 groundCoordinates = Vector3.Scale(head.position, new Vector3(1, 0, 1));
         foreach (Collider col in Physics.OverlapCapsule(groundCoordinates + Vector3.up * 100, groundCoordinates, mapRadius, worldLayer))
         {
-            displayedObjects.Add(col.gameObject);
+            //Find root object
+            Transform curr = col.transform;
+            while (curr != null && !curr.CompareTag(rootTag))
+            {
+                curr = curr.parent;
+            }
 
+            if (curr != null && !displayedObjects.Contains(curr.gameObject))
+            {
+                displayedObjects.Add(curr.gameObject);
+            }
+        }
+
+        foreach(GameObject obj in displayedObjects)
+        {
             //Create mini representation
-            GameObject newMini = Instantiate(col.gameObject, this.transform);
+            GameObject newMini = Instantiate(obj, this.transform);
             newMini.layer = uiLayer;
+            foreach (Transform t in newMini.GetComponentInChildren<Transform>())
+            {
+                //TODO: Optimize?
+                t.gameObject.layer = uiLayer;
+            }
+            newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
             newMini.transform.localScale = Vector3.one * miniScale / mapRadius;
-            newMini.transform.localPosition = getPositionOnSphere(col.transform.position - groundCoordinates);
+            newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
             newMini.transform.up = newMini.transform.position - this.transform.position;
             //TODO: Account for original objects rotation
 

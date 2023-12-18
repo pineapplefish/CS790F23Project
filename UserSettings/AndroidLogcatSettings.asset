@@ -3,63 +3,75 @@
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
         "name": "com.DefaultCompany.FinalProject",
-        "processId": 10080,
+        "processId": 18768,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "1WMHHA42WH2165",
-            "name": "com.oculus.shellenv",
-            "processId": 1985,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 3343,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 4353,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 5293,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 6106,
-            "exited": true
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 5879,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 7092,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
-            "name": "com.DefaultCompany.FinalProject",
-            "processId": 7863,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.FinalProject",
             "processId": 10080,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 11043,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 12855,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.oculus.shellenv",
+            "processId": 1992,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 13682,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 14834,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 15623,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 16430,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 17257,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 18012,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 18768,
             "exited": false
         }
     ],
