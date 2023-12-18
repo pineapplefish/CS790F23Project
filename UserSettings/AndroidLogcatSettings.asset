@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
         "name": "com.DefaultCompany.FinalProject",
-        "processId": 29869,
+        "processId": 30609,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -42,6 +42,12 @@
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.FinalProject",
             "processId": 29869,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 30609,
             "exited": false
         }
     ],

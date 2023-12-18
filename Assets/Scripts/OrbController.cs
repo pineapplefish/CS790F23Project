@@ -121,7 +121,7 @@ public class OrbController : MonoBehaviour
                 t.gameObject.layer = uiLayer;
             }
             newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
-            newMini.transform.localScale = Vector3.one * miniScale / mapRadius;
+            newMini.transform.localScale = obj.transform.localScale * miniScale / mapRadius;
             //newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
             newMini.transform.localPosition = Vector3.up * (0.5f + obj.transform.position.y * (miniScale / mapRadius));
             newMini.transform.RotateAround(this.transform.position, Vector3.Cross(this.transform.up, 
