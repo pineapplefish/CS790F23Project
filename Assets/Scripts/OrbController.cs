@@ -104,9 +104,12 @@ public class OrbController : MonoBehaviour
             }
             newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
             newMini.transform.localScale = Vector3.one * miniScale / mapRadius;
-            newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
-            newMini.transform.up = newMini.transform.position - this.transform.position;
-            //TODO: Account for original objects rotation
+            //newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
+            newMini.transform.localPosition = Vector3.up * (0.5f + obj.transform.position.y * (miniScale / mapRadius));
+            newMini.transform.RotateAround(this.transform.position, Vector3.Cross(this.transform.up, 
+                this.transform.TransformDirection(getPositionOnSphere(obj.transform.position - groundCoordinates))), 
+                90 * (Vector3.Scale(obj.transform.position - groundCoordinates, new Vector3(1, 0, 1)).magnitude / mapRadius));
+            //newMini.transform.up = newMini.transform.position - this.transform.position;
 
             miniObjects.Add(newMini);
         }
