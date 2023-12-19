@@ -2742,6 +2742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportBind: 2
+  grabBind: 1
+  grabDistance: 1.2
 --- !u!114 &456697695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9204,9 +9206,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 5
+  zoomSpeed: 5
   activeScale: 0.5
   inactiveScale: 0.2
   orbActivationButton: 1
+  zoomBind: 1
   mapRadius: 15
   miniScale: 0.75
   worldLayer:

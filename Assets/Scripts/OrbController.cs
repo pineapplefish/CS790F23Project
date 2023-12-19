@@ -7,10 +7,13 @@ public class OrbController : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
+    public float zoomSpeed = 5.0f;
+
     public float activeScale = 0.5f;
     public float inactiveScale = 0.2f;
 
     public OVRInput.RawButton orbActivationButton = OVRInput.RawButton.None;
+    public OVRInput.RawAxis2D zoomBind = OVRInput.RawAxis2D.LThumbstick;
 
     public float mapRadius = 15.0f;
     public float miniScale = 1.0f;
@@ -68,7 +71,7 @@ public class OrbController : MonoBehaviour
             //TODO: Change to Vector3.SmoothDamp?
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
-            //this.transform.up = head.position - this.transform.position;    //TODO: Enable moving of this
+            //this.transform.up = head.position - this.transform.position;
             //this.transform.up = head.position - this.transform.position;
             //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
             //this.transform.Rotate(Vector3.right, 90, Space.Self);
@@ -78,7 +81,12 @@ public class OrbController : MonoBehaviour
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, activeAnchor.rotation,
                     Time.deltaTime * Quaternion.Angle(this.transform.rotation, activeAnchor.rotation) * rotateSpeed);
             }
-            
+
+            //Update zoom
+            if (Mathf.Abs(OVRInput.Get(zoomBind).y) > 0.1f)
+            {
+                mapRadius += OVRInput.Get(zoomBind).y * zoomSpeed * Time.deltaTime;
+            }
         }
         else
         {
@@ -98,7 +106,7 @@ public class OrbController : MonoBehaviour
             }
         }
 
-        //Update world representation
+        //Update main object lists
         foreach (GameObject obj in miniObjects)
         {
             Destroy(obj);
@@ -121,6 +129,7 @@ public class OrbController : MonoBehaviour
             }
         }
 
+        //Create mini objects
         foreach(GameObject obj in displayedObjects)
         {
             //Create mini representation
