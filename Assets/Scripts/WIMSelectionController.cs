@@ -73,12 +73,19 @@ public class WIMSelectionController : MonoBehaviour
                     if (theOrb.InverseTransformPoint(spherePoint).y >= 0)   //Ensure point is on the right half of the sphere
                     {
                         validPoint = true;
+                        rightControllerAnchor.GetComponent<LineRenderer>().colorGradient = teleportationController.ValidLineGradient();
+                    } 
+                    else
+                    {
+                        validPoint = false;
+                        rightControllerAnchor.GetComponent<LineRenderer>().colorGradient = teleportationController.InvalidLineGradient();
                     }
                 }
                 else
                 {
-                    rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, rightControllerAnchor.transform.position + rightControllerAnchor.transform.forward * 5);
                     validPoint = false;
+                    rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, rightControllerAnchor.transform.position + rightControllerAnchor.transform.forward * 5);
+                    rightControllerAnchor.GetComponent<LineRenderer>().colorGradient = teleportationController.InvalidLineGradient();
                 }
 
                 //Trigger released

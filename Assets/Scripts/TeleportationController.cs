@@ -6,6 +6,12 @@ public class TeleportationController : MonoBehaviour
 {
     public LayerMask teleportLayer = Physics.DefaultRaycastLayers;
 
+    public Color validColor = Color.green;
+    public Color invalidColor = Color.red;
+
+    private Gradient validLine;
+    private Gradient invalidLine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +21,13 @@ public class TeleportationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //LineRenderer colors
+        validLine = new Gradient();
+        validLine.SetKeys(new GradientColorKey[] { new GradientColorKey(validColor, 0), new GradientColorKey(validColor, 1) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1, 0), new GradientAlphaKey(1, 1) });
+        invalidLine = new Gradient();
+        invalidLine.SetKeys(new GradientColorKey[] { new GradientColorKey(invalidColor, 0), new GradientColorKey(invalidColor, 1) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1, 0), new GradientAlphaKey(1, 1) });
     }
 
     public void Teleport(float x, float z)
@@ -35,4 +47,7 @@ public class TeleportationController : MonoBehaviour
     {
         this.transform.position = pos;
     }
+
+    public Gradient ValidLineGradient() { return validLine; }
+    public Gradient InvalidLineGradient() { return invalidLine; }
 }
