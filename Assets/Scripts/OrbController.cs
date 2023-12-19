@@ -144,6 +144,10 @@ public class OrbController : MonoBehaviour
             {
                 c.enabled = false;
             }
+            foreach (LODGroup group in newMini.GetComponentsInChildren<LODGroup>())
+            {
+                group.ForceLOD(group.lodCount - 1);
+            }
             newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
             newMini.transform.localScale = obj.transform.localScale * miniScale / mapRadius;
             //newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
