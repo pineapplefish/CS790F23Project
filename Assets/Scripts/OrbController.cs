@@ -29,6 +29,7 @@ public class OrbController : MonoBehaviour
     private List<GameObject> miniObjects = new List<GameObject>();
 
     private bool active = false;
+    private bool autoRotate = true;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,7 @@ public class OrbController : MonoBehaviour
         //Check for mode switch
         if (OVRInput.GetDown(orbActivationButton))
         {
-            toggleActive();
+            ToggleActive();
         }
 
         //Update orb location
@@ -72,19 +73,29 @@ public class OrbController : MonoBehaviour
             //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
             //this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
-            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, activeAnchor.rotation, 
-                Time.deltaTime * Quaternion.Angle(this.transform.rotation, activeAnchor.rotation) * rotateSpeed);
+            if (autoRotate)
+            {
+                this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, activeAnchor.rotation,
+                    Time.deltaTime * Quaternion.Angle(this.transform.rotation, activeAnchor.rotation) * rotateSpeed);
+            }
+            
         }
         else
         {
+            inactiveAnchor.localRotation = inactiveNorthRotation;
+            inactiveAnchor.Rotate(Vector3.up, Mathf.Atan2(-head.forward.x, head.forward.z) * Mathf.Rad2Deg, Space.Self);
+
             this.transform.position = Vector3.MoveTowards(this.transform.position, inactiveAnchor.position,
                 Time.deltaTime * Vector3.Distance(this.transform.position, inactiveAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;
             //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
             //this.transform.Rotate(Vector3.right, 90, Space.Self);
             //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
-            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, inactiveAnchor.rotation,
-                Time.deltaTime * Quaternion.Angle(this.transform.rotation, inactiveAnchor.rotation) * rotateSpeed);
+            if (autoRotate)
+            {
+                this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, inactiveAnchor.rotation,
+                    Time.deltaTime * Quaternion.Angle(this.transform.rotation, inactiveAnchor.rotation) * rotateSpeed);
+            }
         }
 
         //Update world representation
@@ -130,7 +141,7 @@ public class OrbController : MonoBehaviour
             newMini.transform.localPosition = Vector3.up * (0.5f + obj.transform.position.y * (miniScale / mapRadius));
             newMini.transform.localRotation = obj.transform.rotation;
             newMini.transform.RotateAround(this.transform.position, Vector3.Cross(this.transform.up, 
-                this.transform.TransformDirection(getPositionOnSphere(obj.transform.position - groundCoordinates))), 
+                this.transform.TransformDirection(GetPositionOnSphere(obj.transform.position - groundCoordinates))), 
                 90 * (Vector3.Scale(obj.transform.position - groundCoordinates, new Vector3(1, 0, 1)).magnitude / mapRadius));
             //newMini.transform.up = newMini.transform.position - this.transform.position;
 
@@ -138,7 +149,7 @@ public class OrbController : MonoBehaviour
         }
     }
 
-    private Vector3 getPositionOnSphere(Vector3 relativePosition)
+    private Vector3 GetPositionOnSphere(Vector3 relativePosition)
     {
         float angle1 = 90 * (relativePosition.magnitude / mapRadius) * Mathf.Deg2Rad;
         float angle2 = Vector3.SignedAngle(Vector3.forward, Vector3.Scale(relativePosition, new Vector3(1, 0, 1)), Vector3.up) * Mathf.Deg2Rad;
@@ -146,9 +157,9 @@ public class OrbController : MonoBehaviour
         return new Vector3(Mathf.Sin(angle1) * Mathf.Sin(angle2), Mathf.Cos(angle1), Mathf.Sin(angle1) * Mathf.Cos(angle2)) * 0.5f;
     }
 
-    public bool isActive() { return active; }
+    public bool IsActive() { return active; }
 
-    public void toggleActive()
+    public void ToggleActive()
     {
         if (active)
         {
@@ -161,4 +172,12 @@ public class OrbController : MonoBehaviour
             this.transform.localScale = Vector3.one * activeScale;
         }
     }
+
+    public void PauseRotation() 
+    {
+        CancelInvoke("ResumeRotation");
+        autoRotate = false; 
+    }
+    public void ResumeRotation() { autoRotate = true; }
+    public void ResumeRotation(float delay) { Invoke("ResumeRotation", delay); }
 }

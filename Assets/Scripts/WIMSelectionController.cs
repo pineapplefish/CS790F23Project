@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WIMSelectionController : MonoBehaviour
 {
-    public OVRInput.RawAxis1D teleportBind;
+    public OVRInput.RawAxis1D teleportBind = OVRInput.RawAxis1D.RIndexTrigger;
+    public OVRInput.RawAxis1D grabBind = OVRInput.RawAxis1D.LIndexTrigger;
+
+    public float grabDistance = 1.2f;
 
     private Transform theOrb;
     private LayerMask orbLayer = 1 << 6;
@@ -17,6 +20,9 @@ public class WIMSelectionController : MonoBehaviour
     private bool indicating = false;
     private Vector3 spherePoint = Vector3.zero;
     private bool validPoint = false;
+
+    private bool grabbing = false;
+    private Vector3 grabOffset = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +40,7 @@ public class WIMSelectionController : MonoBehaviour
     void Update()
     {
         //Only active when orb is in active view mode
-        if (orbController.isActive())
+        if (orbController.IsActive())
         {
             //Check for activation
             if (!indicating)
@@ -43,6 +49,15 @@ public class WIMSelectionController : MonoBehaviour
                 {
                     indicating = true;
                     rightControllerAnchor.GetComponent<LineRenderer>().enabled = true;
+                }
+            }
+            if (!grabbing)
+            {
+                if (Vector3.Distance(theOrb.position, leftControllerAnchor.transform.position) < orbController.activeScale * 0.5 * grabDistance && OVRInput.Get(grabBind) > 0.8f)
+                {
+                    grabbing = true;
+                    grabOffset = theOrb.up - (leftControllerAnchor.transform.position - theOrb.position).normalized;
+                    orbController.PauseRotation();
                 }
             }
 
@@ -55,7 +70,10 @@ public class WIMSelectionController : MonoBehaviour
                 {
                     rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, hit.point);
                     spherePoint = hit.point;
-                    validPoint = true;
+                    if (theOrb.InverseTransformPoint(spherePoint).y >= 0)   //Ensure point is on the right half of the sphere
+                    {
+                        validPoint = true;
+                    }
                 }
                 else
                 {
@@ -78,11 +96,25 @@ public class WIMSelectionController : MonoBehaviour
                         //print(dist + " " + angle);
                         teleportationController.Teleport(this.transform.position.x + (dist * Mathf.Sin(angle)),
                             this.transform.position.z + (dist * Mathf.Cos(angle)));
-                        orbController.toggleActive();
+                        orbController.ToggleActive();
                     }
                 }
             }
-            //TODO: Rotate sphere with left controller
+
+            //Grab active
+            if (grabbing)
+            {
+                //Rotate sphere
+                theOrb.up = (leftControllerAnchor.transform.position - theOrb.position).normalized + grabOffset;
+
+                //Trigger released
+                if (OVRInput.Get(grabBind) < 0.2f)
+                {
+                    //Disable grab
+                    grabbing = false;
+                    orbController.ResumeRotation(2);
+                }
+            }
         }
 
 
