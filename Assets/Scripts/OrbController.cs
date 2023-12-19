@@ -120,6 +120,10 @@ public class OrbController : MonoBehaviour
                 //TODO: Optimize?
                 t.gameObject.layer = uiLayer;
             }
+            foreach (Collider c in newMini.GetComponentsInChildren<Collider>())
+            {
+                c.enabled = false;
+            }
             newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
             newMini.transform.localScale = obj.transform.localScale * miniScale / mapRadius;
             //newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
