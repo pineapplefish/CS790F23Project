@@ -64,7 +64,7 @@ public class WIMSelectionController : MonoBehaviour
                 grabPoint = leftControllerAnchor.transform.position;
                 grabRotation = theOrb.rotation;
                 orbController.PauseRotation();
-                //theOrb.GetComponent<Rigidbody>().isKinematic = true;
+                theOrb.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
 
@@ -126,13 +126,15 @@ public class WIMSelectionController : MonoBehaviour
                 grabbing = false;
                 orbController.ResumeRotation(2);
 
-                //theOrb.GetComponent<Rigidbody>().isKinematic = false;
+                theOrb.GetComponent<Rigidbody>().isKinematic = false;
+                theOrb.GetComponent<Rigidbody>().AddTorque(((theOrb.eulerAngles - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
                 //theOrb.GetComponent<Rigidbody>().AddRelativeTorque(((theOrb.localEulerAngles - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
                 //theOrb.GetComponent<Rigidbody>().AddTorque((activeAnchor.TransformDirection(activeAnchor.InverseTransformDirection(theOrb.eulerAngles) - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
             }
             else
             {
                 //Rotate sphere
+                prevRot = theOrb.eulerAngles;
                 //prevRot = theOrb.localEulerAngles;
                 //prevRot = activeAnchor.InverseTransformDirection(theOrb.eulerAngles);
                 //theOrb.up = (leftControllerAnchor.transform.position - theOrb.position).normalized + grabOffset;
