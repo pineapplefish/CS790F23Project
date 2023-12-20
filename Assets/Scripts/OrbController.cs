@@ -196,6 +196,10 @@ public class OrbController : MonoBehaviour
         CancelInvoke("ResumeRotation");
         autoRotate = false; 
     }
-    public void ResumeRotation() { autoRotate = true; }
+    public void ResumeRotation()
+    {
+        this.GetComponent<Rigidbody>().isKinematic = true;
+        autoRotate = true;
+    }
     public void ResumeRotation(float delay) { Invoke("ResumeRotation", delay); }
 }

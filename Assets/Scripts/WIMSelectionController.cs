@@ -8,6 +8,7 @@ public class WIMSelectionController : MonoBehaviour
     public OVRInput.RawAxis1D grabBind = OVRInput.RawAxis1D.LIndexTrigger;
 
     public float grabDistance = 1.2f;
+    public float rotSpeed = 360.0f;
 
     private Transform theOrb;
     private LayerMask orbLayer = 1 << 6;
@@ -22,7 +23,12 @@ public class WIMSelectionController : MonoBehaviour
     private bool validPoint = false;
 
     private bool grabbing = false;
-    private Vector3 grabOffset = Vector3.zero;
+    private Vector3 grabPoint = Vector3.zero;
+    private Quaternion grabRotation = Quaternion.identity;
+    private Vector3 prevRot = Vector3.zero;
+    private float forceMult = 0.025f;
+
+    private Transform activeAnchor;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,8 @@ public class WIMSelectionController : MonoBehaviour
 
         rightControllerAnchor = this.transform.Find("TrackingSpace/RightHandAnchor/RightControllerAnchor").gameObject;
         leftControllerAnchor = this.transform.Find("TrackingSpace/LeftHandAnchor/LeftControllerAnchor").gameObject;
+
+        activeAnchor = GameObject.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/OrbActiveAnchor").transform;
     }
 
     // Update is called once per frame
@@ -53,8 +61,10 @@ public class WIMSelectionController : MonoBehaviour
             if (Vector3.Distance(theOrb.position, leftControllerAnchor.transform.position) < orbController.activeScale * 0.5 * grabDistance && OVRInput.Get(grabBind) > 0.8f)
             {
                 grabbing = true;
-                grabOffset = theOrb.up - (leftControllerAnchor.transform.position - theOrb.position).normalized;
+                grabPoint = leftControllerAnchor.transform.position;
+                grabRotation = theOrb.rotation;
                 orbController.PauseRotation();
+                //theOrb.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
 
@@ -109,15 +119,27 @@ public class WIMSelectionController : MonoBehaviour
         //Grab active
         if (grabbing)
         {
-            //Rotate sphere
-            theOrb.up = (leftControllerAnchor.transform.position - theOrb.position).normalized + grabOffset;
-
             //Trigger released
             if (OVRInput.Get(grabBind) < 0.2f)
             {
                 //Disable grab
                 grabbing = false;
                 orbController.ResumeRotation(2);
+
+                //theOrb.GetComponent<Rigidbody>().isKinematic = false;
+                //theOrb.GetComponent<Rigidbody>().AddRelativeTorque(((theOrb.localEulerAngles - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
+                //theOrb.GetComponent<Rigidbody>().AddTorque((activeAnchor.TransformDirection(activeAnchor.InverseTransformDirection(theOrb.eulerAngles) - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
+            }
+            else
+            {
+                //Rotate sphere
+                //prevRot = theOrb.localEulerAngles;
+                //prevRot = activeAnchor.InverseTransformDirection(theOrb.eulerAngles);
+                //theOrb.up = (leftControllerAnchor.transform.position - theOrb.position).normalized + grabOffset;
+                //theOrb.rotation = activeAnchor.rotation;
+                theOrb.rotation = grabRotation;
+                theOrb.Rotate(Vector3.Cross(Vector3.forward, new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y)),
+                    new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y).magnitude * rotSpeed, Space.World);
             }
         }
         
