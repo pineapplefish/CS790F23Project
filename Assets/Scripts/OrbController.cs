@@ -34,6 +34,8 @@ public class OrbController : MonoBehaviour
     private bool active = false;
     private bool autoRotate = true;
 
+    private TeleportationController teleportationController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,7 @@ public class OrbController : MonoBehaviour
         inactiveNorthRotation = inactiveAnchor.localRotation;
 
         this.transform.localScale = Vector3.one * inactiveScale;
+        teleportationController = GameObject.Find("OVRCameraRig").GetComponent<TeleportationController>();
     }
 
     // Update is called once per frame
@@ -178,11 +181,13 @@ public class OrbController : MonoBehaviour
         {
             active = false;
             this.transform.localScale = Vector3.one * inactiveScale;
+            teleportationController.SetMode(TeleportationController.SelectionMode.ARC);
         }
         else
         {
             active = true;
             this.transform.localScale = Vector3.one * activeScale;
+            teleportationController.SetMode(TeleportationController.SelectionMode.WIM);
         }
     }
 

@@ -2729,6 +2729,9 @@ MonoBehaviour:
   teleportLayer:
     serializedVersion: 2
     m_Bits: 129
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidColor: {r: 1, g: 0, b: 0, a: 1}
+  activeMode: 1
 --- !u!114 &456697694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2756,6 +2759,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a88b9ae21e032e4f9a1ad697b078374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportBind: 1
+  teleportLayer:
+    serializedVersion: 2
+    m_Bits: 147
 --- !u!114 &456697700
 MonoBehaviour:
   m_ObjectHideFlags: 0

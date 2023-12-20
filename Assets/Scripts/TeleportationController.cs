@@ -9,17 +9,17 @@ public class TeleportationController : MonoBehaviour
     public Color validColor = Color.green;
     public Color invalidColor = Color.red;
 
+    public enum SelectionMode { WIM, ARC }
+    public SelectionMode activeMode = SelectionMode.ARC;
+
     private Gradient validLine;
     private Gradient invalidLine;
 
+    private WIMSelectionController wimController;
+    private ParabolicSelectionController arcController;
+
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         //LineRenderer colors
         validLine = new Gradient();
@@ -28,6 +28,17 @@ public class TeleportationController : MonoBehaviour
         invalidLine = new Gradient();
         invalidLine.SetKeys(new GradientColorKey[] { new GradientColorKey(invalidColor, 0), new GradientColorKey(invalidColor, 1) },
             new GradientAlphaKey[] { new GradientAlphaKey(1, 0), new GradientAlphaKey(1, 1) });
+
+        //Controller references
+        wimController = GetComponent<WIMSelectionController>();
+        arcController = GetComponent<ParabolicSelectionController>();
+        SetMode(activeMode);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     public void Teleport(float x, float z)
@@ -50,4 +61,19 @@ public class TeleportationController : MonoBehaviour
 
     public Gradient ValidLineGradient() { return validLine; }
     public Gradient InvalidLineGradient() { return invalidLine; }
+
+    public void SetMode(SelectionMode mode)
+    {
+        if (mode == SelectionMode.WIM)
+        {
+            wimController.enabled = true;
+            arcController.enabled = false;
+        }
+        else if (mode == SelectionMode.ARC)
+        {
+            wimController.enabled = false;
+            arcController.enabled = true;
+        }
+        activeMode = mode;
+    }
 }
