@@ -16,9 +16,11 @@ public class OrbController : MonoBehaviour
     public OVRInput.RawAxis2D zoomBind = OVRInput.RawAxis2D.LThumbstick;
 
     public float mapRadius = 15.0f;
+    public float maxRadius = 30.0f;
     public float miniScale = 1.0f;
     public LayerMask worldLayer = 0;
     public string rootTag = "ObjectRoot";
+    public string ignoreTag = "MiniIgnore";
 
     private Transform activeAnchor;
     private Transform inactiveAnchor;
@@ -88,7 +90,7 @@ public class OrbController : MonoBehaviour
             //Update zoom
             if (Mathf.Abs(OVRInput.Get(zoomBind).y) > 0.1f)
             {
-                mapRadius -= OVRInput.Get(zoomBind).y * zoomSpeed * Time.deltaTime;
+                mapRadius = Mathf.Min(mapRadius - OVRInput.Get(zoomBind).y * zoomSpeed * Time.deltaTime, maxRadius);
             }
         }
         else
@@ -142,6 +144,10 @@ public class OrbController : MonoBehaviour
             {
                 //TODO: Optimize?
                 t.gameObject.layer = uiLayer;
+                if (t.CompareTag(ignoreTag))
+                {
+                    t.gameObject.SetActive(false);
+                }
             }
             foreach (Collider c in newMini.GetComponentsInChildren<Collider>())
             {

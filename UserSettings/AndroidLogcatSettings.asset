@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "1WMHHA42WH2165",
         "name": "com.DefaultCompany.FinalProject",
-        "processId": 7527,
+        "processId": 8917,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -66,6 +66,18 @@
             "deviceId": "1WMHHA42WH2165",
             "name": "com.DefaultCompany.FinalProject",
             "processId": 7527,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 8788,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHHA42WH2165",
+            "name": "com.DefaultCompany.FinalProject",
+            "processId": 8917,
             "exited": false
         }
     ],
