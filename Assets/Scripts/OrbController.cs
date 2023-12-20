@@ -88,7 +88,7 @@ public class OrbController : MonoBehaviour
             //Update zoom
             if (Mathf.Abs(OVRInput.Get(zoomBind).y) > 0.1f)
             {
-                mapRadius += OVRInput.Get(zoomBind).y * zoomSpeed * Time.deltaTime;
+                mapRadius -= OVRInput.Get(zoomBind).y * zoomSpeed * Time.deltaTime;
             }
         }
         else
