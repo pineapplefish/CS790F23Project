@@ -73,7 +73,6 @@ public class OrbController : MonoBehaviour
             activeAnchor.localRotation = activeNorthRotation;
             activeAnchor.Rotate(Vector3.up, Mathf.Atan2(-head.forward.x, head.forward.z) * Mathf.Rad2Deg, Space.Self);
 
-            //TODO: Change to Vector3.SmoothDamp?
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
             //this.transform.up = head.position - this.transform.position;
