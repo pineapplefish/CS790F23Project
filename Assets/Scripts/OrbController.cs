@@ -67,7 +67,7 @@ public class OrbController : MonoBehaviour
             ToggleActive();
         }
 
-        //Update orb location
+        //Update orb position
         if (active)
         {
             activeAnchor.localRotation = activeNorthRotation;
@@ -75,11 +75,7 @@ public class OrbController : MonoBehaviour
 
             this.transform.position = Vector3.MoveTowards(this.transform.position, activeAnchor.position, 
                 Time.deltaTime * Vector3.Distance(this.transform.position, activeAnchor.position) * moveSpeed);
-            //this.transform.up = head.position - this.transform.position;
-            //this.transform.up = head.position - this.transform.position;
-            //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
-            //this.transform.Rotate(Vector3.right, 90, Space.Self);
-            //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
+
             if (autoRotate)
             {
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, activeAnchor.rotation,
@@ -99,10 +95,7 @@ public class OrbController : MonoBehaviour
 
             this.transform.position = Vector3.MoveTowards(this.transform.position, inactiveAnchor.position,
                 Time.deltaTime * Vector3.Distance(this.transform.position, inactiveAnchor.position) * moveSpeed);
-            //this.transform.up = head.position - this.transform.position;
-            //this.transform.rotation = Quaternion.LookRotation(head.position - this.transform.position, Vector3.down);
-            //this.transform.Rotate(Vector3.right, 90, Space.Self);
-            //this.transform.forward = Vector3.Scale(this.transform.forward, new Vector3(0, 1, 1));
+
             if (autoRotate)
             {
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, inactiveAnchor.rotation,
@@ -141,7 +134,6 @@ public class OrbController : MonoBehaviour
             newMini.layer = uiLayer;
             /*foreach (Transform t in newMini.GetComponentInChildren<Transform>())
             {
-                //TODO: Optimize?
                 t.gameObject.layer = uiLayer;
                 if (t.CompareTag(ignoreTag))
                 {
@@ -160,29 +152,16 @@ public class OrbController : MonoBehaviour
             {
                 group.ForceLOD(group.lodCount - 1);
             }
-            newMini.tag = "Untagged";   //TODO: Figure out a better solution to house duplication issue
+            newMini.tag = "Untagged";
             newMini.transform.localScale = obj.transform.localScale * miniScale / mapRadius;
-            //newMini.transform.localPosition = getPositionOnSphere(obj.transform.position - groundCoordinates);
             newMini.transform.localPosition = Vector3.up * (0.5f + obj.transform.position.y * (miniScale / mapRadius));
             newMini.transform.localRotation = obj.transform.rotation;
-            /*newMini.transform.RotateAround(this.transform.position, Vector3.Cross(this.transform.up, 
-                this.transform.TransformDirection(GetPositionOnSphere(obj.transform.position - groundCoordinates))), 
-                90 * (Vector3.Scale(obj.transform.position - groundCoordinates, new Vector3(1, 0, 1)).magnitude / mapRadius));*/
             newMini.transform.RotateAround(this.transform.position, Vector3.Cross(this.transform.up,
                 this.transform.TransformDirection(Vector3.Scale(obj.transform.position - groundCoordinates, new Vector3(1, 0, 1)))),
                 90 * (Vector3.Scale(obj.transform.position - groundCoordinates, new Vector3(1, 0, 1)).magnitude / mapRadius));
-            //newMini.transform.up = newMini.transform.position - this.transform.position;
 
             miniObjects.Add(newMini);
         }
-    }
-
-    private Vector3 GetPositionOnSphere(Vector3 relativePosition)
-    {
-        float angle1 = 90 * (relativePosition.magnitude / mapRadius) * Mathf.Deg2Rad;
-        float angle2 = Vector3.SignedAngle(Vector3.forward, Vector3.Scale(relativePosition, new Vector3(1, 0, 1)), Vector3.up) * Mathf.Deg2Rad;
-        //TODO: Account for vertical position
-        return new Vector3(Mathf.Sin(angle1) * Mathf.Sin(angle2), Mathf.Cos(angle1), Mathf.Sin(angle1) * Mathf.Cos(angle2)) * 0.5f;
     }
 
     public bool IsActive() { return active; }

@@ -28,8 +28,6 @@ public class WIMSelectionController : MonoBehaviour
     private Vector3 prevRot = Vector3.zero;
     private float forceMult = 0.025f;
 
-    private Transform activeAnchor;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +38,6 @@ public class WIMSelectionController : MonoBehaviour
 
         rightControllerAnchor = this.transform.Find("TrackingSpace/RightHandAnchor/RightControllerAnchor").gameObject;
         leftControllerAnchor = this.transform.Find("TrackingSpace/LeftHandAnchor/LeftControllerAnchor").gameObject;
-
-        activeAnchor = GameObject.Find("OVRCameraRig/TrackingSpace/CenterEyeAnchor/OrbActiveAnchor").transform;
     }
 
     // Update is called once per frame
@@ -126,64 +122,19 @@ public class WIMSelectionController : MonoBehaviour
                 grabbing = false;
                 orbController.ResumeRotation(2);
 
+                //Rotation force
                 theOrb.GetComponent<Rigidbody>().isKinematic = false;
                 theOrb.GetComponent<Rigidbody>().AddTorque(((theOrb.eulerAngles - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
-                //theOrb.GetComponent<Rigidbody>().AddRelativeTorque(((theOrb.localEulerAngles - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
-                //theOrb.GetComponent<Rigidbody>().AddTorque((activeAnchor.TransformDirection(activeAnchor.InverseTransformDirection(theOrb.eulerAngles) - prevRot) / Time.deltaTime) * forceMult, ForceMode.VelocityChange);
             }
             else
             {
                 //Rotate sphere
                 prevRot = theOrb.eulerAngles;
-                //prevRot = theOrb.localEulerAngles;
-                //prevRot = activeAnchor.InverseTransformDirection(theOrb.eulerAngles);
-                //theOrb.up = (leftControllerAnchor.transform.position - theOrb.position).normalized + grabOffset;
-                //theOrb.rotation = activeAnchor.rotation;
                 theOrb.rotation = grabRotation;
                 theOrb.Rotate(Vector3.Cross(Vector3.forward, new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y)),
                     new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y).magnitude * rotSpeed, Space.World);
             }
         }
-        
-
-
-        //Activate linerenderer when pointing at sphere
-        /*RaycastHit hit;
-        if (Physics.SphereCast(rightControllerAnchor.transform.position - (rightControllerAnchor.transform.forward * 0.1f), 0.1f, rightControllerAnchor.transform.forward, out hit, 5, orbLayer))
-        {
-            rightControllerAnchor.GetComponent<LineRenderer>().enabled = true;
-            rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(0, rightControllerAnchor.transform.position);
-            if (Physics.Raycast(rightControllerAnchor.transform.position, rightControllerAnchor.transform.forward, out hit, 5, orbLayer)) 
-            {
-                rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, hit.point);
-                if (OVRInput.Get(teleportBind) > 0.8f)
-                {
-                    //Convert sphere point to teleport coordinates
-                    float dist = theOrb.GetComponent<OrbController>().mapRadius * (Vector3.Angle(theOrb.up, hit.point - theOrb.position) / 90);
-                    float angle = Vector3.SignedAngle(theOrb.forward, Vector3.ProjectOnPlane(hit.point - theOrb.position, theOrb.up), theOrb.up) * Mathf.Deg2Rad;
-                    print(dist + " " + angle);
-                    //teleportationController.Teleport(dist * Mathf.Sin(angle), dist * Mathf.Cos(angle));
-                }
-            }
-            else
-            {
-                rightControllerAnchor.GetComponent<LineRenderer>().SetPosition(1, rightControllerAnchor.transform.position + rightControllerAnchor.transform.forward * 5);
-            }
-            
-        }
-        else
-        {
-            rightControllerAnchor.GetComponent<LineRenderer>().enabled = false;
-        }*/
-        /*if (Physics.SphereCast(leftControllerAnchor.transform.position, 2, leftControllerAnchor.transform.forward, out hit, 5, orbLayer))
-        {
-
-        }*/
-    }
-
-    private void OnEnable()
-    {
-        //rightControllerAnchor.GetComponent<LineRenderer>().positionCount = 2;
     }
 
 }
