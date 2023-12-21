@@ -18466,6 +18466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 753725617}
     m_Modifications:
+    - target: {fileID: 1951396579347375732, guid: 2415eee8dc9a7af4bbd6563b6502cea1, type: 3}
+      propertyPath: m_TagString
+      value: MiniIgnore
+      objectReference: {fileID: 0}
     - target: {fileID: 2523925579645749551, guid: 2415eee8dc9a7af4bbd6563b6502cea1, type: 3}
       propertyPath: m_Name
       value: Fire_01

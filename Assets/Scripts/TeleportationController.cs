@@ -43,7 +43,7 @@ public class TeleportationController : MonoBehaviour
 
     public void Teleport(float x, float z)
     {
-        if (Physics.Raycast(new Vector3(x, 100, z), Vector3.down, out RaycastHit hit, 100, teleportLayer))
+        if (Physics.Raycast(new Vector3(x, 100, z), Vector3.down, out RaycastHit hit, 120, teleportLayer))
         {
             Teleport(hit.point);
         }
