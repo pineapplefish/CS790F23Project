@@ -15,6 +15,7 @@ public class WIMSelectionController : MonoBehaviour
     private TeleportationController teleportationController;
     private OrbController orbController;
 
+    private GameObject head;
     private GameObject rightControllerAnchor;
     private GameObject leftControllerAnchor;
 
@@ -36,6 +37,7 @@ public class WIMSelectionController : MonoBehaviour
         teleportationController = GetComponent<TeleportationController>();
         orbController = theOrb.GetComponent<OrbController>();
 
+        head = this.transform.Find("TrackingSpace/CenterEyeAnchor").gameObject;
         rightControllerAnchor = this.transform.Find("TrackingSpace/RightHandAnchor/RightControllerAnchor").gameObject;
         leftControllerAnchor = this.transform.Find("TrackingSpace/LeftHandAnchor/LeftControllerAnchor").gameObject;
     }
@@ -57,7 +59,7 @@ public class WIMSelectionController : MonoBehaviour
             if (Vector3.Distance(theOrb.position, leftControllerAnchor.transform.position) < orbController.activeScale * 0.5 * grabDistance && OVRInput.Get(grabBind) > 0.8f)
             {
                 grabbing = true;
-                grabPoint = leftControllerAnchor.transform.position;
+                grabPoint = Vector3.Scale(head.transform.InverseTransformPoint(leftControllerAnchor.transform.position), new Vector3(1, 1, 0));
                 grabRotation = theOrb.rotation;
                 orbController.PauseRotation();
                 theOrb.GetComponent<Rigidbody>().isKinematic = true;
@@ -131,8 +133,9 @@ public class WIMSelectionController : MonoBehaviour
                 //Rotate sphere
                 prevRot = theOrb.eulerAngles;
                 theOrb.rotation = grabRotation;
-                theOrb.Rotate(Vector3.Cross(Vector3.forward, new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y)),
-                    new Vector3(grabPoint.x - leftControllerAnchor.transform.position.x, grabPoint.y - leftControllerAnchor.transform.position.y).magnitude * rotSpeed, Space.World);
+                Vector3 headCoords = head.transform.InverseTransformPoint(leftControllerAnchor.transform.position);
+                theOrb.Rotate(Vector3.Cross(head.transform.forward, head.transform.TransformDirection(new Vector3(grabPoint.x - headCoords.x, grabPoint.y - headCoords.y))),
+                    new Vector3(grabPoint.x - headCoords.x, grabPoint.y - headCoords.y).magnitude * rotSpeed, Space.World);
             }
         }
     }
