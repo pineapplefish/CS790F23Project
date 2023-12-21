@@ -139,7 +139,7 @@ public class OrbController : MonoBehaviour
             //Create mini representation
             GameObject newMini = Instantiate(obj, this.transform);
             newMini.layer = uiLayer;
-            foreach (Transform t in newMini.GetComponentInChildren<Transform>())
+            /*foreach (Transform t in newMini.GetComponentInChildren<Transform>())
             {
                 //TODO: Optimize?
                 t.gameObject.layer = uiLayer;
@@ -147,6 +147,10 @@ public class OrbController : MonoBehaviour
                 {
                     t.gameObject.SetActive(false);
                 }
+            }*/
+            foreach (ParticleSystem p in newMini.GetComponentsInChildren<ParticleSystem>())
+            {
+                p.Stop();
             }
             foreach (Collider c in newMini.GetComponentsInChildren<Collider>())
             {
